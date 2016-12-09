@@ -78,7 +78,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\IM.AdventOfCode2016.csproj">
+    <ProjectReference Include="..\..\src\IM.AdventOfCode2016\IM.AdventOfCode2016.csproj">
       <Project>{EF00F62D-A702-4615-9F26-C9F8EB61C77F}</Project>
       <Name>IM.AdventOfCode2016</Name>
     </ProjectReference>

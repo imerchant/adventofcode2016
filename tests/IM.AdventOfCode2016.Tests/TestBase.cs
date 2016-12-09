@@ -25,7 +25,7 @@ namespace IM.AdventOfCode2016.Tests
 			Settings.Converters.Add(new StringEnumConverter());
 		}
 
-		public static void WriteObject<T>(this ITestOutputHelper output, T value) where T : class
+		public static void WriteObject<T>(this ITestOutputHelper output, T value)
 		{
 			var json = JsonConvert.SerializeObject(value, Formatting.Indented, Settings);
 			output.WriteLine(json);

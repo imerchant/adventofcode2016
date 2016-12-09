@@ -1,21 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IM.AdventOfCode2016
 {
 	public static class Moving
 	{
-		public static Coord Move(this Coord location, Move action)
+		public static State Move(this State state, Move action)
 		{
-			var facing = location.Turn(action.Direction);
-			var x = location.TranslateX(facing, action.Distance);
-			var y = location.TranslateY(facing, action.Distance);
-			return new Coord(x, y, facing);
+			var newDirection = state.Facing.Turn(action.Direction);
+			var newPosition = state.Position;
+			var doublePosition = state.DoubleVisited;
+			for (var k = 0; k < action.Distance; ++k)
+			{
+				newPosition = newPosition.Step(newDirection);
+				if (!doublePosition.HasValue && !state.Visited.Add(newPosition))
+				{
+					Console.WriteLine($"First double located position is {newPosition} at distance {newPosition.TaxiCabDistance()}.");
+					doublePosition = newPosition;
+				}
+				else
+				{
+					state.Visited.Add(newPosition);
+				}
+			}
+
+			return new State(newPosition, newDirection, state.Visited, doublePosition);
 		}
 
-		public static Coord Travel(this Coord location, IEnumerable<Move> actions)
+		public static State Travel(this State state, IEnumerable<Move> actions)
 		{
-			return actions.Aggregate(location, (coord, move) => coord.Move(move));
+			return actions.Aggregate(state, (current, move) => current.Move(move));
 		}
 	}
 }

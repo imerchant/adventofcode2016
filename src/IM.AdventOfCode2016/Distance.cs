@@ -4,9 +4,9 @@ namespace IM.AdventOfCode2016
 {
 	public static class Distance
 	{
-		public static long TaxiCabDistance(this Coord c1, Coord c2)
+		public static long TaxiCabDistance(this Point point)
 		{
-			return Math.Abs(c1.X - c2.X) + Math.Abs(c1.Y - c2.Y);
+			return Math.Abs(point.X) + Math.Abs(point.Y);
 		}
 	}
 }

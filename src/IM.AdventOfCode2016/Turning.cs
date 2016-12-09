@@ -19,9 +19,9 @@ namespace IM.AdventOfCode2016
 			Directions = new LinkedList<FacingDirection>(directions);
 		}
 
-		public static FacingDirection Turn(this Coord coord, TurningDirection turn)
+		public static FacingDirection Turn(this FacingDirection current, TurningDirection turnTo)
 		{
-			return TurningStrategies[turn](Directions.Find(coord.Facing));
+			return TurningStrategies[turnTo](Directions.Find(current));
 		}
 	}
 }
