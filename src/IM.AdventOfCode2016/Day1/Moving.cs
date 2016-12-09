@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IM.AdventOfCode2016
+namespace IM.AdventOfCode2016.Day1
 {
 	public static class Moving
 	{

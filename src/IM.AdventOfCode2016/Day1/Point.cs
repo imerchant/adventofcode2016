@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace IM.AdventOfCode2016
+﻿namespace IM.AdventOfCode2016.Day1
 {
 	public struct Point
 	{
