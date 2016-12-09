@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Xunit.Abstractions;
 
@@ -16,11 +17,18 @@ namespace IM.AdventOfCode2016.Tests
 
 	public static class TestExtensions
 	{
-		private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+		private static readonly JsonSerializerSettings Settings;
+
+		static TestExtensions()
+		{
+			Settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+			Settings.Converters.Add(new StringEnumConverter());
+		}
 
 		public static void WriteObject<T>(this ITestOutputHelper output, T value) where T : class
 		{
 			var json = JsonConvert.SerializeObject(value, Formatting.Indented, Settings);
+			output.WriteLine(json);
 		}
 	}
 }
