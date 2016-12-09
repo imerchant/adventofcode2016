@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM.AdventOfCode2016", "src\IM.AdventOfCode2016.csproj", "{EF00F62D-A702-4615-9F26-C9F8EB61C77F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM.AdventOfCode2016", "src\IM.AdventOfCode2016\IM.AdventOfCode2016.csproj", "{EF00F62D-A702-4615-9F26-C9F8EB61C77F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_tests", "_tests", "{4E4451D5-6807-477F-AED4-202CB7B13E1C}"
 EndProject
