@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace IM.AdventOfCode2016.Day1
+namespace IM.AdventOfCode2016
 {
 	public static class Extensions
 	{
@@ -9,6 +10,12 @@ namespace IM.AdventOfCode2016.Day1
 			if (typeof(TEnum).IsEnum == false)
 				throw new ArgumentException("given Type is not an enum");
 			return (TEnum)Enum.Parse(typeof(TEnum), source, ignoreCase);
+		}
+
+		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, TValue defaultValue = default(TValue))
+		{
+			TValue value;
+			return dict != null && dict.TryGetValue(key, out value) ? value : defaultValue;
 		}
 	}
 }

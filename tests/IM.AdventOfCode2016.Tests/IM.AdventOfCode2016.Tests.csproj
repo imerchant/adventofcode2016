@@ -70,9 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Day1.cs" />
+    <Compile Include="Day2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBase.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="InputsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

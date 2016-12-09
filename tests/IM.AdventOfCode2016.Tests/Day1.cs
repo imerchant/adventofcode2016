@@ -8,7 +8,6 @@ namespace IM.AdventOfCode2016.Tests
 {
 	public class Day1 : TestBase
 	{
-		private const string RawInstructions = Inputs.Day1;
 		private readonly State _startingState;
 
 		public Day1(ITestOutputHelper output) : base(output)
@@ -19,7 +18,7 @@ namespace IM.AdventOfCode2016.Tests
 		[Fact]
 		public void Puzzle1_FindDistanceAfterInstructions()
 		{
-			var moves = Utilities.Day1ParseMoves(RawInstructions);
+			var moves = Inputs.Day1Parse(Inputs.Day1);
 
 			Output.WriteLine("number of moves: {0}", moves.Count);
 
@@ -37,7 +36,7 @@ namespace IM.AdventOfCode2016.Tests
 		[Fact]
 		public void Puzzle2_FindFirstDoubleVisitedLocation()
 		{
-			var moves = Utilities.Day1ParseMoves(RawInstructions);
+			var moves = Inputs.Day1Parse(Inputs.Day1);
 			var state = _startingState;
 
 			foreach (var move in moves)
@@ -60,7 +59,7 @@ namespace IM.AdventOfCode2016.Tests
 		[InlineData("R5, L5, R5, R3", 12)]
 		public void GivenTestCasesPassDistanceCheck(string moveString, int expectedDistance)
 		{
-			var moves = Utilities.Day1ParseMoves(moveString);
+			var moves = Inputs.Day1Parse(moveString);
 
 			var endingState = _startingState.Travel(moves);
 
