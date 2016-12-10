@@ -17,5 +17,29 @@ namespace IM.AdventOfCode2016.Day2
 		{
 			return Neighbors.GetValueOrDefault(direction, this);
 		}
+
+		public GridNode Up(GridNode node)
+		{
+			Neighbors[Direction.U] = node;
+			return this;
+		}
+
+		public GridNode Right(GridNode node)
+		{
+			Neighbors[Direction.R] = node;
+			return this;
+		}
+
+		public GridNode Down(GridNode node)
+		{
+			Neighbors[Direction.D] = node;
+			return this;
+		}
+
+		public GridNode Left(GridNode node)
+		{
+			Neighbors[Direction.L] = node;
+			return this;
+		}
 	}
 }

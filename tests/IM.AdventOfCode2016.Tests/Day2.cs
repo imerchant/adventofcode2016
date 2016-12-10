@@ -26,7 +26,7 @@ namespace IM.AdventOfCode2016.Tests
 
 			foreach (var row in directions)
 			{
-				var finalInRow = row.Aggregate(_puzzle1Grid.Current, (node, direction) => _puzzle1Grid.Step(direction));
+				var finalInRow = _puzzle1Grid.Walk(row);
 				resultBuilder.Append(finalInRow.Value);
 			}
 
@@ -35,6 +35,25 @@ namespace IM.AdventOfCode2016.Tests
 			Output.WriteLine($"Code to bathroom: {result}");
 
 			result.Should().Be("78985");
+		}
+
+		[Fact]
+		public void Puzzle2_UnlockComplexBathroom()
+		{
+			var directions = Inputs.Day2Parse(Inputs.Day2);
+			var resultBuilder = new StringBuilder(5);
+
+			foreach (var row in directions)
+			{
+				var finalInRow = _puzzle2Grid.Walk(row);
+				resultBuilder.Append($"{finalInRow.Value:X}");
+			}
+
+			var result = resultBuilder.ToString(); // "57DD8"
+
+			Output.WriteLine($"Code to bathroom: {result}");
+
+			result.Should().Be("57DD8");
 		}
 
 		[Fact]
@@ -51,7 +70,7 @@ UUUUD";
 
 			foreach (var row in directions)
 			{
-				var current = row.Aggregate(_puzzle1Grid.Current, (node, direction) => _puzzle1Grid.Step(direction));
+				var current = _puzzle1Grid.Walk(row);
 				resultBuilder.Append(current.Value);
 			}
 
@@ -74,13 +93,37 @@ UUUUD";
 
 			foreach (var row in directions)
 			{
-				var current = row.Aggregate(_puzzle2Grid.Current, (node, direction) => _puzzle2Grid.Step(direction));
-				resultBuilder.Append(current.Value);
+				var current = _puzzle2Grid.Walk(row);
+				resultBuilder.Append($"{current.Value:X}");
 			}
 
 			var result = resultBuilder.ToString();
 
 			result.Should().Be(expectedCode);
+		}
+
+		[Theory]
+		[InlineData(1, 1, 1, 3, 1)]
+		[InlineData(2, 2, 3, 6, 2)]
+		[InlineData(3, 1, 4, 7, 2)]
+		[InlineData(4, 4, 4, 8, 3)]
+		[InlineData(5, 5, 6, 5, 5)]
+		[InlineData(6, 2, 7, 10, 5)]
+		[InlineData(7, 3, 8, 11, 6)]
+		[InlineData(8, 4, 9, 12, 7)]
+		[InlineData(9, 9, 9, 9, 8)]
+		[InlineData(10, 6, 11, 10, 10)] // A
+		[InlineData(11, 7, 12, 13, 10)] // B
+		[InlineData(12, 8, 12, 12, 11)] // C
+		[InlineData(13, 11, 13, 13, 13)] // D
+		public void Puzzle2GridIsDefinedCorrectly(int currentNode, int upTarget, int rightTarget, int downTarget, int leftTarget)
+		{
+			var current = Grids.Puzzle2Grid[currentNode];
+
+			current.Next(Direction.U).Value.Should().Be(upTarget);
+			current.Next(Direction.R).Value.Should().Be(rightTarget);
+			current.Next(Direction.D).Value.Should().Be(downTarget);
+			current.Next(Direction.L).Value.Should().Be(leftTarget);
 		}
 
 		[Fact]
