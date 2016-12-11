@@ -51,5 +51,17 @@ UUUUD";
 
 			actual.ShouldBeEquivalentTo(_day2ExampleExpected);
 		}
+
+		[Fact]
+		public void Day3_RetrieveWorks()
+		{
+			var day3 = Inputs.Day3;
+
+			day3.Should().NotBeNullOrEmpty();
+
+			var triangles = Inputs.Day3Parse(day3);
+
+			triangles.Should().HaveCount(1734);
+		}
 	}
 }

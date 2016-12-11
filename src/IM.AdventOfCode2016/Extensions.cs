@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IM.AdventOfCode2016
 {
@@ -16,6 +17,11 @@ namespace IM.AdventOfCode2016
 		{
 			TValue value;
 			return dict != null && dict.TryGetValue(key, out value) ? value : defaultValue;
+		}
+
+		public static bool HasAny<T>(this IEnumerable<T> source)
+		{
+			return source != null && source.Any();
 		}
 	}
 }
