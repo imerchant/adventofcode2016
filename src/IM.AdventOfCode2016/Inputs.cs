@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using IM.AdventOfCode2016.Day1;
 using IM.AdventOfCode2016.Day2;
@@ -23,17 +21,7 @@ DDUURRLULDLULULLDUDDRURDDRLRDULUURURRLURDLRRDUUDLULDRDLDLRLULLRULLDRLDRRULUDRLDU
 URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRULRRDLRUDUDLDDDLLLRLRLRUUUUUULURRRLRLUDULURLDLLDUUDDRUDLDUDRRLULLULLDURDDRRLLRLDLLLLRLULLDDDDLDULLRDUURDUDURRUULLDRULUDLUULUUDDLDDRDLULLULDLDRLDLRULLRLURDURUDRLDURDRULRLLLLURRURLRURUDUDRRUDUUDURDDRRDRLURLURRLDRRLLRLRUDLRLLRLDLDDRDLURLLDURUDDUUDRRLRUDLUDULDRUDDRDRDRURDLRLLRULDDURLUUUUDLUDRRURDDUUURRLRRDDLULLLDLRULRRRLDRRURRURRUUDDDLDRRURLRRRRDLDLDUDURRDDLLLUULDDLRLURLRRURDRUULDDDUDRDRUDRRLRLLLLLURDULDUDRLULDRLUULUDDDDUDDRDDLDDRLLRULRRURDDDRDDLDLULRDDRRURRUDRDDDDRURDRRURUUDUDDUURULLDRDULURUDUD";
 
 		private static string _day3;
-		public static string Day3
-		{
-			get
-			{
-				if (_day3 == null)
-				{
-					_day3 = File.ReadAllText(@"Input/Day3.txt");
-				}
-				return _day3;
-			}
-		}
+		public static string Day3 => _day3 ?? (_day3 = File.ReadAllText(@"Input/Day3.txt"));
 
 		private static readonly Regex Day1MoveRegex = new Regex(@"\b(?'direction'[lrLR]{1})(?'distance'\d+)\b", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 		public static IList<Move> Day1Parse(string moves) =>
@@ -51,7 +39,7 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 		});
 		public static Direction[][] Day2Parse(string moves)
 		{
-			var lines = moves.Split(new []{ '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+			var lines = moves.SplitOn('\n').TrimEach().ToArray();
 
 			var directions = new Direction[lines.Length][];
 
@@ -63,14 +51,37 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 			return directions;
 		}
 
-		public static List<Triangle> Day3Parse(string input)
+		public static List<Triangle> Day3ParseByRow(string input)
 		{
-			return input.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim())
+			return input.SplitOn('\n')
+				.TrimEach()
 				.Select(line =>
 				{
-					var nums = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).Select(x => long.Parse(x.Trim())).ToArray();
+					var nums = line.SplitOn(' ').Select(x => long.Parse(x.Trim())).ToArray();
 					return new Triangle(nums);
 				}).ToList();
+		}
+
+		public static List<Triangle> Day3ParseByColumn(string input)
+		{
+			var lines = input.SplitOn('\n').TrimEach().ToList();
+
+			var cols = new[] { new List<long>(), new List<long>(), new List<long>() };
+
+			foreach (var line in lines)
+			{
+				line.SplitOn(' ').ForEach((item, index) => cols[index].Add(long.Parse(item)));
+			}
+
+			return cols.SelectMany(Day3TrianglesByThrees).ToList();
+		}
+
+		private static IEnumerable<Triangle> Day3TrianglesByThrees(List<long> numbers)
+		{
+			for (var k = 0; k < numbers.Count; k += 3)
+			{
+				yield return new Triangle(numbers[k], numbers[k+1], numbers[k+2]);
+			}
 		}
 	}
 }

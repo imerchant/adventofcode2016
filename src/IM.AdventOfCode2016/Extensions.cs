@@ -23,5 +23,22 @@ namespace IM.AdventOfCode2016
 		{
 			return source != null && source.Any();
 		}
+
+		public static void ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
+		{
+			var count = 0;
+			foreach (var item in source)
+				action(item, count++);
+		}
+
+		public static string[] SplitOn(this string source, params char[] separators)
+		{
+			return source?.Split(separators, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+		}
+
+		public static IEnumerable<string> TrimEach(this IEnumerable<string> source)
+		{
+			return source?.Select(x => x.Trim()) ?? Enumerable.Empty<string>();
+		}
 	}
 }

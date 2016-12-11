@@ -56,11 +56,20 @@ UUUUD";
 		public void Day3_RetrieveWorks()
 		{
 			var day3 = Inputs.Day3;
-
 			day3.Should().NotBeNullOrEmpty();
+		}
 
-			var triangles = Inputs.Day3Parse(day3);
+		[Fact]
+		public void Day3ParseByRowWorks()
+		{
+			var triangles = Inputs.Day3ParseByRow(Inputs.Day3);
+			triangles.Should().HaveCount(1734);
+		}
 
+		[Fact]
+		public void Day3ParseByColumnWorks()
+		{
+			var triangles = Inputs.Day3ParseByColumn(Inputs.Day3);
 			triangles.Should().HaveCount(1734);
 		}
 	}

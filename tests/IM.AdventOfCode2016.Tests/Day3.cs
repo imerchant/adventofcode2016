@@ -13,15 +13,32 @@ namespace IM.AdventOfCode2016.Tests
 		}
 
 		[Fact]
-		public void Puzzle1_CountInvalidTriangles()
+		public void Puzzle1_CountValidTrianglesByRow()
 		{
-			var triangles = Inputs.Day3Parse(Inputs.Day3);
+			var triangles = Inputs.Day3ParseByRow(Inputs.Day3);
 
 			var valid = triangles.Count(x => x.IsValid);
 			var invalid = triangles.Count(x => !x.IsValid);
 
-			Output.WriteLine($"valid: {valid}, invalid: {invalid}");
+			Output.WriteLine($"valid: {valid}, invalid: {invalid}"); // 917, 817
 
+			valid.Should().Be(917);
+			invalid.Should().Be(817);
+			(valid + invalid).Should().Be(1734);
+		}
+
+		[Fact]
+		public void Puzzle2_CountValidTrianglesByColumn()
+		{
+			var triangles = Inputs.Day3ParseByColumn(Inputs.Day3);
+
+			var valid = triangles.Count(x => x.IsValid);
+			var invalid = triangles.Count(x => !x.IsValid);
+
+			Output.WriteLine($"valid: {valid}, invalid: {invalid}"); // 1649, 85
+
+			valid.Should().Be(1649);
+			invalid.Should().Be(85);
 			(valid + invalid).Should().Be(1734);
 		}
 
