@@ -40,5 +40,10 @@ namespace IM.AdventOfCode2016
 		{
 			return source?.Select(x => x.Trim()) ?? Enumerable.Empty<string>();
 		}
+
+		public static string AsString(this IEnumerable<char> chars)
+		{
+			return new string(chars.ToArray());
+		}
 	}
 }

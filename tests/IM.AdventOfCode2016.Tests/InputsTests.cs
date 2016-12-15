@@ -2,6 +2,7 @@
 using FluentAssertions;
 using IM.AdventOfCode2016.Day1;
 using IM.AdventOfCode2016.Day2;
+using IM.AdventOfCode2016.Day4;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -11,6 +12,7 @@ namespace IM.AdventOfCode2016.Tests
 	{
 		private readonly List<Move> R2L3;
 		private readonly Direction[][] _day2ExampleExpected;
+		private readonly List<RoomAndMaybeChecksum> _day4ExampleExpected;
 
 		public InputsTests(ITestOutputHelper output) : base(output)
 		{
@@ -26,6 +28,14 @@ namespace IM.AdventOfCode2016.Tests
 				new [] { Direction.R, Direction.R, Direction.D, Direction.D, Direction.D },
 				new [] { Direction.L, Direction.U, Direction.R, Direction.D, Direction.L },
 				new [] { Direction.U, Direction.U, Direction.U, Direction.U, Direction.D }
+			};
+
+			_day4ExampleExpected = new List<RoomAndMaybeChecksum>
+			{
+				new RoomAndMaybeChecksum(123, "aaaaa-bbb-z-y-x", "abxyz"),
+				new RoomAndMaybeChecksum(987, "a-b-c-d-e-f-g-h", "abcde"),
+				new RoomAndMaybeChecksum(404, "not-a-real-room", "oarel"),
+				new RoomAndMaybeChecksum(200, "totally-real-room", "decoy")
 			};
 		}
 
@@ -71,6 +81,35 @@ UUUUD";
 		{
 			var triangles = Inputs.Day3ParseByColumn(Inputs.Day3);
 			triangles.Should().HaveCount(1734);
+		}
+
+		[Fact]
+		public void Day4Parse_CreatesCorrectRoomAndMaybeChecksumList()
+		{
+			const string exampleInput = @"aaaaa-bbb-z-y-x-123[abxyz]
+a-b-c-d-e-f-g-h-987[abcde]
+not-a-real-room-404[oarel]
+totally-real-room-200[decoy]";
+
+			var actual = Inputs.Day4Parse(exampleInput);
+
+			actual.ShouldBeEquivalentTo(_day4ExampleExpected);
+		}
+
+		[Fact]
+		public void Day4Regex_Works()
+		{
+			const string input = "aaaaa-bbb-z-y-x-123[abxyz]";
+
+			Inputs.Day4Regex.IsMatch(input).Should().BeTrue();
+		}
+
+		[Fact]
+		public void Day4Parse_IngestsCorrectNumberOfRooms()
+		{
+			var rooms = Inputs.Day4Parse(Inputs.Day4);
+
+			rooms.Should().HaveCount(1091);
 		}
 	}
 }

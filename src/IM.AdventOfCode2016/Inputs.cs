@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text.RegularExpressions;
 using IM.AdventOfCode2016.Day1;
 using IM.AdventOfCode2016.Day2;
 using IM.AdventOfCode2016.Day3;
+using IM.AdventOfCode2016.Day4;
 
 namespace IM.AdventOfCode2016
 {
@@ -20,8 +22,22 @@ DDDUDDRRDRRRUULDRULDLDLURRRUURULRUDDRLLLLURRLRULDLURRULDRUDRRLLLLDULRDLUUURDDLDL
 DDUURRLULDLULULLDUDDRURDDRLRDULUURURRLURDLRRDUUDLULDRDLDLRLULLRULLDRLDRRULUDRLDURUURLLDLLDDLUULLRLRULRLUURDDDDDRLDRLLLDLULDLDLULRRURLLLLLLRLUDLRRLRULUULLLLURDLLRLLDDUDLLULDLLURUUDLRDRDUDDDRDDUULRLLDDDLLRLURLUDLULRRUUUULLDLDLLLDRLUDRDRDLUDLRUDRDRUDRDLLDDLRRLRDLDURDLDRUUUDRLULUULDURDLUUUDDDDDLDRDURDLULDDLLUDUURRUDDLURUDDLRLUUDURUDUULULUDLDLUURDULURURULDDDLUUUUDLUUDUDLLLRDDLRDDLRURRRLLLULLURULLRDLLDRULRDDULULRLUDRRRDULRLLUDUULLRDRDDDULULRURULDLDLDRDLDUDRDULLUUUUUDLRDURDUUULLLRUULLRUULDRRUUDLLLULLUURLDDLUULLRLRLRDRLLLRLURDDURUDUULULDLRLRLLUDURRURDRUDLRDLLRDDRDUULRDRLLRULLUDDRLDLDDDDUDRDD
 URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRULRRDLRUDUDLDDDLLLRLRLRUUUUUULURRRLRLUDULURLDLLDUUDDRUDLDUDRRLULLULLDURDDRRLLRLDLLLLRLULLDDDDLDULLRDUURDUDURRUULLDRULUDLUULUUDDLDDRDLULLULDLDRLDLRULLRLURDURUDRLDURDRULRLLLLURRURLRURUDUDRRUDUUDURDDRRDRLURLURRLDRRLLRLRUDLRLLRLDLDDRDLURLLDURUDDUUDRRLRUDLUDULDRUDDRDRDRURDLRLLRULDDURLUUUUDLUDRRURDDUUURRLRRDDLULLLDLRULRRRLDRRURRURRUUDDDLDRRURLRRRRDLDLDUDURRDDLLLUULDDLRLURLRRURDRUULDDDUDRDRUDRRLRLLLLLURDULDUDRLULDRLUULUDDDDUDDRDDLDDRLLRULRRURDDDRDDLDLULRDDRRURRUDRDDDDRURDRRURUUDUDDUURULLDRDULURUDUD";
 
-		private static string _day3;
-		public static string Day3 => _day3 ?? (_day3 = File.ReadAllText(@"Input/Day3.txt"));
+		public static string Day3 => GetDay(3);
+
+		public static string Day4 => GetDay(4);
+
+		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
+		private static string GetDay(int day)
+		{
+			string input;
+			if (_inputs.TryGetValue(day, out input))
+				return input;
+
+			input = File.ReadAllText($@"Input/Day{day}.txt");
+			_inputs[day] = input;
+
+			return input;
+		}
 
 		private static readonly Regex Day1MoveRegex = new Regex(@"\b(?'direction'[lrLR]{1})(?'distance'\d+)\b", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 		public static IList<Move> Day1Parse(string moves) =>
@@ -83,5 +99,17 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 				yield return new Triangle(numbers[k], numbers[k+1], numbers[k+2]);
 			}
 		}
+
+		public static readonly Regex Day4Regex = new Regex(@"^(?'name'[a-z\-]+?)-(?'id'\d+?)\[(?'checksum'\w+?)\]\r?$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+		public static List<RoomAndMaybeChecksum> Day4Parse(string input) =>
+			Day4Regex.Matches(input)
+				.Cast<Match>()
+				.Select(line => new RoomAndMaybeChecksum
+				(
+					id: long.Parse(line.Groups["id"].Value),
+					name: line.Groups["name"].Value,
+					maybeChecksum: line.Groups["checksum"].Value
+				))
+				.ToList();
 	}
 }
