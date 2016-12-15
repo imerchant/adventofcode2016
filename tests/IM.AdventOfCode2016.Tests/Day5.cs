@@ -23,6 +23,17 @@ namespace IM.AdventOfCode2016.Tests
 			Output.WriteLine($"Time elapsed: {watch.Elapsed}");
 		}
 
+		[Fact(Skip = "this takes >4 minutes")]
+		public void Puzzle2_GeneratePassword()
+		{
+			var watch = Stopwatch.StartNew();
+			var password = PasswordGenerator.GenerateOutOfOrder(Inputs.Day5); // 694190cd
+			watch.Stop();
+
+			Output.WriteLine($"Password: {password}");
+			Output.WriteLine($"Time elapsed: {watch.Elapsed}");
+		}
+
 		[Fact(Skip = "holy balls this takes forever")]
 		public void Puzzle1_GivenTestCaseWorks()
 		{
@@ -35,6 +46,20 @@ namespace IM.AdventOfCode2016.Tests
 			Output.WriteLine($"Password: {password}");
 			Output.WriteLine($"Time elapsed: {watch.Elapsed}");
 			password.Should().Be("18f47a30");
+		}
+
+		[Fact(Skip = "holy balls this takes forever")]
+		public void Puzzle2_GivenTestCaseWorks()
+		{
+			const string input = "abc";
+
+			var watch = Stopwatch.StartNew();
+			var password = PasswordGenerator.GenerateOutOfOrder(input);
+			watch.Stop();
+
+			Output.WriteLine($"Password: {password}");
+			Output.WriteLine($"Time elapsed: {watch.Elapsed}");
+			password.Should().Be("05ace8e3");
 		}
 	}
 }
