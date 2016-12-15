@@ -5,26 +5,29 @@ namespace IM.AdventOfCode2016.Day4
 	public class Room
 	{
 		public long Id { get; }
-		public string Name { get; }
+		public string EncryptedName { get; }
 
 		private readonly Lazy<string> _checksum;
 		public string Checksum => _checksum.Value;
 
-		public Room(long id, string name)
+		private string _unencryptedName;
+		public string Name => _unencryptedName ?? (_unencryptedName = Decrypter.Decrypt(EncryptedName, Id));
+
+		public Room(long id, string encryptedName)
 		{
 			Id = id;
-			Name = name;
+			EncryptedName = encryptedName;
 			_checksum = new Lazy<string>(GenerateChecksum);
 		}
 
 		private string GenerateChecksum()
 		{
-			return Name.Checksum();
+			return EncryptedName.Checksum();
 		}
 
 		public override string ToString()
 		{
-			return $"{Name}-{Id}[{Checksum}]";
+			return $"{EncryptedName}-{Id}[{Checksum}]";
 		}
 	}
 }

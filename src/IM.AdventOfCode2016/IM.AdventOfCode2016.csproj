@@ -54,6 +54,7 @@
     <Compile Include="Day2\Grids.cs" />
     <Compile Include="Day3\Triangle.cs" />
     <Compile Include="Day4\ChecksumGenerator.cs" />
+    <Compile Include="Day4\Decrypter.cs" />
     <Compile Include="Day4\Letter.cs" />
     <Compile Include="Day4\Room.cs" />
     <Compile Include="Day4\RoomAndMaybeChecksum.cs" />

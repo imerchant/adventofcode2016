@@ -5,7 +5,9 @@
 		public Room Room { get; }
 		public string MaybeChecksum { get; }
 
-		public long Value => Room.Checksum == MaybeChecksum ? Room.Id : 0L;
+		public long Value => IsReal ? Room.Id : 0L;
+
+		public bool IsReal => Room.Checksum == MaybeChecksum;
 
 		public RoomAndMaybeChecksum(long id, string name, string maybeChecksum)
 		{
