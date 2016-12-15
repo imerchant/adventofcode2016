@@ -26,6 +26,8 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 
 		public static string Day4 => GetDay(4);
 
+		public const string Day5 = "uqwqemis";
+
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
 		{
