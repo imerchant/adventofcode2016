@@ -59,12 +59,15 @@
     <Compile Include="Day4\Room.cs" />
     <Compile Include="Day4\RoomAndMaybeChecksum.cs" />
     <Compile Include="Day5\PasswordGenerator.cs" />
+    <Compile Include="Day6\Letter.cs" />
+    <Compile Include="Day6\MessageRecovery.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Day1\FacingDirection.cs" />
     <Compile Include="Day1\Move.cs" />
     <Compile Include="Day1\Moving.cs" />
     <Compile Include="Day2\Grid.cs" />
     <Compile Include="Inputs.cs" />
+    <Compile Include="MoreLinq\MoreEnumerable.MaxBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Day1\State.cs" />
     <Compile Include="Day1\Translating.cs" />
@@ -73,12 +76,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Input\Day3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Input\Day4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Input\Day6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

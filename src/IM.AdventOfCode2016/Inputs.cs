@@ -28,6 +28,8 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 
 		public const string Day5 = "uqwqemis";
 
+		public static string Day6 => GetDay(6);
+
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
 		{
@@ -113,5 +115,7 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 					maybeChecksum: line.Groups["checksum"].Value
 				))
 				.ToList();
+
+		public static List<string> Day6Parse(string input) => input.SplitOn('\n').TrimEach().ToList();
 	}
 }
