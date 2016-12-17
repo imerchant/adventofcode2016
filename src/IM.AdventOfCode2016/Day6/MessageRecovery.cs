@@ -8,6 +8,20 @@ namespace IM.AdventOfCode2016.Day6
 	{
 		public static string RecoverByMostCommon(List<string> messages)
 		{
+			return GetLetterCounts(messages)
+				.Select(col => col.Values.MaxBy(l => l.Count).Char)
+				.AsString();
+		}
+
+		public static string RecoverByLeastCommon(List<string> messages)
+		{
+			return GetLetterCounts(messages)
+				.Select(col => col.Values.MinBy(l => l.Count).Char)
+				.AsString();
+		}
+
+		private static IEnumerable<IDictionary<char, Letter>> GetLetterCounts(IList<string> messages)
+		{
 			var chars = messages[0].Length;
 
 			var columns = Enumerable.Range(0, chars).Select(x => new Dictionary<char, Letter>(26)).ToArray();
@@ -22,8 +36,7 @@ namespace IM.AdventOfCode2016.Day6
 					columns[k][c] = letter;
 				}
 			}
-
-			return columns.Select(col => col.Values.MaxBy(l => l.Count).Char).AsString();
+			return columns;
 		}
 	}
 }

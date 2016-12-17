@@ -16,14 +16,26 @@ namespace IM.AdventOfCode2016.Tests
 		{
 			var messages = Inputs.Day6Parse(Inputs.Day6);
 
-			var message = MessageRecovery.RecoverByMostCommon(messages);
+			var message = MessageRecovery.RecoverByMostCommon(messages); // "cyxeoccr"
 
 			Output.WriteLine($"Recovered message: {message}");
 
 			message.Should().Be("cyxeoccr");
 		}
 
-		private const string Puzzle1Example = @"eedadn
+		[Fact]
+		public void Puzzle2_RecoverMessageByLeastCommonLetter()
+		{
+			var messages = Inputs.Day6Parse(Inputs.Day6);
+
+			var message = MessageRecovery.RecoverByLeastCommon(messages); // "batwpask"
+
+			Output.WriteLine($"Recovered message: {message}");
+
+			message.Should().Be("batwpask");
+		}
+
+		private const string PuzzleExample = @"eedadn
 drvtee
 eandsr
 raavrd
@@ -41,11 +53,19 @@ dvrsen
 enarar";
 
 		[Fact]
-		public void CanRecoverMessageFrom_Puzzle1Example()
+		public void CanRecoverMessageFrom_ByMostCommon()
 		{
-			var messages = Inputs.Day6Parse(Puzzle1Example);
+			var messages = Inputs.Day6Parse(PuzzleExample);
 
 			MessageRecovery.RecoverByMostCommon(messages).Should().Be("easter");
+		}
+
+		[Fact]
+		public void CanRecoverMessage_ByLeastCommon()
+		{
+			var messages = Inputs.Day6Parse(PuzzleExample);
+
+			MessageRecovery.RecoverByLeastCommon(messages).Should().Be("advent");
 		}
 	}
 }
