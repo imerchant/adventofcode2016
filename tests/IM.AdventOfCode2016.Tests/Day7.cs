@@ -24,6 +24,18 @@ namespace IM.AdventOfCode2016.Tests
 			count.Should().Be(105);
 		}
 
+		[Fact]
+		public void Puzzle2_CountSslAddresses()
+		{
+			var ips = Inputs.Day7Parse(Inputs.Day7);
+
+			var count = ips.Count(IpAssessment.SupportsSsl); // 258
+
+			Output.WriteLine($"Number of IPs that support SSL: {count}");
+
+			count.Should().Be(258);
+		}
+
 		[Theory]
 		[InlineData("abba[mnop]qrst", true)]
 		[InlineData("abcd[bddb]xyyx", false)] // match within brackets
@@ -42,6 +54,24 @@ namespace IM.AdventOfCode2016.Tests
 		public void CanIdentifyAbba(string fragment, bool expected)
 		{
 			IpAssessment.IsAbba(fragment).Should().Be(expected);
+		}
+
+		[Theory]
+		[InlineData("aba[bab]xyz", true)]
+		[InlineData("xyx[xyx]xyx", false)]
+		[InlineData("aaa[kek]eke", true)]
+		[InlineData("zazbz[bzb]cdb", true)]
+		public void Puzzle2_TestCasesPass(string ip, bool expected)
+		{
+			IpAssessment.SupportsSsl(ip).Should().Be(expected);
+		}
+
+		[Theory]
+		[InlineData("aba", "bab")]
+		[InlineData("kek", "eke")]
+		public void AbaToBab_WorksCorrectly(string fragment, string expected)
+		{
+			fragment.AbaToBab().Should().Be(expected);
 		}
 	}
 }
