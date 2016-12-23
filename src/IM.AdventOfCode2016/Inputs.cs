@@ -30,6 +30,8 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 
 		public static string Day6 => GetDay(6);
 
+		public static string Day7 => GetDay(7);
+
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
 		{
@@ -117,5 +119,7 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 				.ToList();
 
 		public static List<string> Day6Parse(string input) => input.SplitOn('\n').TrimEach().ToList();
+
+		public static List<string> Day7Parse(string input) => input.SplitOn('\n').TrimEach().ToList();
 	}
 }
