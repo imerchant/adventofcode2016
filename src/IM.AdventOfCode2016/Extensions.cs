@@ -45,5 +45,10 @@ namespace IM.AdventOfCode2016
 		{
 			return new string(chars.ToArray());
 		}
+
+		public static List<string> SplitLines(this string source)
+		{
+			return source.SplitOn('\n').TrimEach().ToList();
+		}
 	}
 }

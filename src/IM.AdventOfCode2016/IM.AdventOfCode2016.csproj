@@ -66,6 +66,9 @@
     <Compile Include="Day6\Letter.cs" />
     <Compile Include="Day6\MessageRecovery.cs" />
     <Compile Include="Day7\IpAssessment.cs" />
+    <Compile Include="Day8\Day8Extensions.cs" />
+    <Compile Include="Day8\Pixel.cs" />
+    <Compile Include="Day8\Screen.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Day1\FacingDirection.cs" />
     <Compile Include="Day1\Move.cs" />
@@ -93,6 +96,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Input\Day7.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Input\Day8.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

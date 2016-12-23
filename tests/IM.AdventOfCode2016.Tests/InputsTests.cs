@@ -127,5 +127,13 @@ totally-real-room-200[decoy]";
 
 			messages.Should().HaveCount(2000);
 		}
+
+		[Fact]
+		public void Day8Parse_IngestsCorrectNumberOfStrings()
+		{
+			var instructions = Inputs.Day8Parse(Inputs.Day8);
+
+			instructions.Should().HaveCount(153);
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -8,6 +9,7 @@ using IM.AdventOfCode2016.Day1;
 using IM.AdventOfCode2016.Day2;
 using IM.AdventOfCode2016.Day3;
 using IM.AdventOfCode2016.Day4;
+using IM.AdventOfCode2016.Day8;
 
 namespace IM.AdventOfCode2016
 {
@@ -31,6 +33,8 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 		public static string Day6 => GetDay(6);
 
 		public static string Day7 => GetDay(7);
+
+		public static string Day8 => GetDay(8);
 
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
@@ -118,8 +122,51 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 				))
 				.ToList();
 
-		public static List<string> Day6Parse(string input) => input.SplitOn('\n').TrimEach().ToList();
+		public static List<string> Day6Parse(string input) => input.SplitLines();
 
-		public static List<string> Day7Parse(string input) => input.SplitOn('\n').TrimEach().ToList();
+		public static List<string> Day7Parse(string input) => input.SplitLines();
+
+		private static readonly Regex Day8Rect = new Regex(@"^rect (?'cols'\d+)x(?'row'\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex Day8RotateRow = new Regex(@"^rotate row y=(?'row'\d+) by (?'count'\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex Day8RotateColumn = new Regex(@"^rotate column x=(?'col'\d+) by (?'count'\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		public static List<Action<Screen>> Day8Parse(string input)
+		{
+			var lines = input.SplitLines();
+			var moves = new List<Action<Screen>>();
+
+			foreach (var line in lines)
+			{
+				var rectMatch = Day8Rect.Match(line);
+				if (rectMatch.Success)
+				{
+					var cols = int.Parse(rectMatch.Groups["cols"].Value);
+					var row = int.Parse(rectMatch.Groups["row"].Value);
+					moves.Add(s => s.Rect(cols, row));
+					continue;
+				}
+
+				var rotateRowMatch = Day8RotateRow.Match(line);
+				if (rotateRowMatch.Success)
+				{
+					var row = int.Parse(rotateRowMatch.Groups["row"].Value);
+					var count = int.Parse(rotateRowMatch.Groups["count"].Value);
+					moves.Add(s => s.RotateRow(row, count));
+					continue;
+				}
+
+				var rotateColMatch = Day8RotateColumn.Match(line);
+				if (rotateColMatch.Success)
+				{
+					var col = int.Parse(rotateColMatch.Groups["col"].Value);
+					var count = int.Parse(rotateColMatch.Groups["count"].Value);
+					moves.Add(s => s.RotateColumn(col, count));
+					continue;
+				}
+
+				throw new Exception($"cannot parse \"{line}\"");
+			}
+
+			return moves;
+		}
 	}
 }
