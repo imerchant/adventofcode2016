@@ -25,6 +25,18 @@ namespace IM.AdventOfCode2016.Tests
 			length.Should().Be(99145);
 		}
 
+		[Fact]
+		public void Puzzle2_FindLengthWithV2Compression()
+		{
+			var input = Inputs.Day9;
+
+			var length = TextCompression.DecompressedLengthV2(input); // 10943094568
+
+			Output.WriteLine($"Decompressed length with V2: {length}");
+
+			length.Should().Be(10943094568);
+		}
+
 		[Theory]
 		[InlineData("ADVENT", "ADVENT", 6)]
 		[InlineData("A(1x5)BC", "ABBBBBC", 7)]
@@ -37,6 +49,16 @@ namespace IM.AdventOfCode2016.Tests
 			TextCompression.Decompress(input).Should()
 				.HaveLength(expectedLength)
 				.And.Be(expected);
+		}
+
+		[Theory]
+		[InlineData("(3x3)XYZ", 9L)]
+		[InlineData("X(8x2)(3x3)ABCY", 20L)]
+		[InlineData("(27x12)(20x12)(13x14)(7x10)(1x12)A", 241920L)]
+		[InlineData("(25x3)(3x3)ABC(2x3)XY(5x2)PQRSTX(18x9)(3x2)TWO(5x7)SEVEN", 445L)]
+		public void Puzzle2Examples_DetermineLengthCorrectly(string input, long expectedLength)
+		{
+			TextCompression.DecompressedLengthV2(input).Should().Be(expectedLength);
 		}
 	}
 }
