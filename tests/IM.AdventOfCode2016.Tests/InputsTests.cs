@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using IM.AdventOfCode2016.Day1;
-using IM.AdventOfCode2016.Day2;
-using IM.AdventOfCode2016.Day4;
+using IM.AdventOfCode2016.Day01;
+using IM.AdventOfCode2016.Day02;
+using IM.AdventOfCode2016.Day04;
 using Xunit;
 using Xunit.Abstractions;
 

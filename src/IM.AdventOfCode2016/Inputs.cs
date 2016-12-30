@@ -5,11 +5,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using IM.AdventOfCode2016.Day1;
-using IM.AdventOfCode2016.Day2;
-using IM.AdventOfCode2016.Day3;
-using IM.AdventOfCode2016.Day4;
-using IM.AdventOfCode2016.Day8;
+using IM.AdventOfCode2016.Day01;
+using IM.AdventOfCode2016.Day02;
+using IM.AdventOfCode2016.Day03;
+using IM.AdventOfCode2016.Day04;
+using IM.AdventOfCode2016.Day08;
 
 namespace IM.AdventOfCode2016
 {
@@ -38,6 +38,8 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 
 		public static string Day9 => GetDay(9);
 
+		public static string Day10 => GetDay(10);
+
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
 		{
@@ -45,7 +47,7 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 			if (_inputs.TryGetValue(day, out input))
 				return input;
 
-			input = File.ReadAllText($@"Input/Day{day}.txt");
+			input = File.ReadAllText($@"Input/Day{day:00}.txt");
 			_inputs[day] = input;
 
 			return input;
