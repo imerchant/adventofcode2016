@@ -1,13 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM.AdventOfCode2016", "src\IM.AdventOfCode2016\IM.AdventOfCode2016.csproj", "{EF00F62D-A702-4615-9F26-C9F8EB61C77F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IM.AdventOfCode2016", "src\IM.AdventOfCode2016\IM.AdventOfCode2016.csproj", "{184BE2D8-630A-485D-ACEA-883AB0E4A053}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_tests", "_tests", "{4E4451D5-6807-477F-AED4-202CB7B13E1C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_tests", "_tests", "{02E889AE-9C90-4269-924E-6804907D6B59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IM.AdventOfCode2016.Tests", "tests\IM.AdventOfCode2016.Tests\IM.AdventOfCode2016.Tests.csproj", "{A7F6465D-3889-408F-A8EE-836DFD948E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IM.AdventOfCode2016.Tests", "tests\IM.AdventOfCode2016.Tests\IM.AdventOfCode2016.Tests.csproj", "{AA571779-F783-4CB3-9B76-C4E313081F02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_input", "_input", "{214F93F4-43FB-4A2D-BBF3-F28292F55DB0}"
+	ProjectSection(SolutionItems) = preProject
+		input\Day03.txt = input\Day03.txt
+		input\Day04.txt = input\Day04.txt
+		input\Day06.txt = input\Day06.txt
+		input\Day07.txt = input\Day07.txt
+		input\Day08.txt = input\Day08.txt
+		input\Day09.txt = input\Day09.txt
+		input\Day10.txt = input\Day10.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,19 +26,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF00F62D-A702-4615-9F26-C9F8EB61C77F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF00F62D-A702-4615-9F26-C9F8EB61C77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF00F62D-A702-4615-9F26-C9F8EB61C77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF00F62D-A702-4615-9F26-C9F8EB61C77F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7F6465D-3889-408F-A8EE-836DFD948E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7F6465D-3889-408F-A8EE-836DFD948E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7F6465D-3889-408F-A8EE-836DFD948E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7F6465D-3889-408F-A8EE-836DFD948E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184BE2D8-630A-485D-ACEA-883AB0E4A053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184BE2D8-630A-485D-ACEA-883AB0E4A053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184BE2D8-630A-485D-ACEA-883AB0E4A053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184BE2D8-630A-485D-ACEA-883AB0E4A053}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA571779-F783-4CB3-9B76-C4E313081F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA571779-F783-4CB3-9B76-C4E313081F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA571779-F783-4CB3-9B76-C4E313081F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA571779-F783-4CB3-9B76-C4E313081F02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A7F6465D-3889-408F-A8EE-836DFD948E11} = {4E4451D5-6807-477F-AED4-202CB7B13E1C}
+		{AA571779-F783-4CB3-9B76-C4E313081F02} = {02E889AE-9C90-4269-924E-6804907D6B59}
 	EndGlobalSection
 EndGlobal

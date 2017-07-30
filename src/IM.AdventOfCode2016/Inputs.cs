@@ -44,11 +44,10 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 		private static readonly IDictionary<int, string> _inputs = new ConcurrentDictionary<int, string>();
 		private static string GetDay(int day)
 		{
-			string input;
-			if (_inputs.TryGetValue(day, out input))
+			if (_inputs.TryGetValue(day, out string input))
 				return input;
 
-			input = File.ReadAllText($@"Input/Day{day:00}.txt");
+			input = File.ReadAllText($@"../../input/Day{day:00}.txt");
 			_inputs[day] = input;
 
 			return input;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("IM.AdventOfCode2016.Tests")]
 
 namespace IM.AdventOfCode2016.Day07
 {
