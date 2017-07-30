@@ -70,6 +70,9 @@
     <Compile Include="Day08\Pixel.cs" />
     <Compile Include="Day08\Screen.cs" />
     <Compile Include="Day09\TextCompression.cs" />
+    <Compile Include="Day10\Bot.cs" />
+    <Compile Include="Day10\BotOps.cs" />
+    <Compile Include="Day10\BotState.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Day01\FacingDirection.cs" />
     <Compile Include="Day01\Move.cs" />
@@ -108,9 +111,6 @@
     <Content Include="Input\Day09.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Day10\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -50,5 +50,10 @@ namespace IM.AdventOfCode2016
 		{
 			return source.SplitOn('\n').TrimEach().ToList();
 		}
+
+		public static int? ToInt(this string source)
+		{
+			return int.TryParse(source, out int i) ? i : (int?)null;
+		}
 	}
 }

@@ -10,6 +10,7 @@ using IM.AdventOfCode2016.Day02;
 using IM.AdventOfCode2016.Day03;
 using IM.AdventOfCode2016.Day04;
 using IM.AdventOfCode2016.Day08;
+using IM.AdventOfCode2016.Day10;
 
 namespace IM.AdventOfCode2016
 {
@@ -171,6 +172,52 @@ URDLUDUDLULURUDRLUDLUDLRLRLLDDDDDLURURUURLRDUDLRRUUDUURDURUULDRRRDDDLDUURRRDLRUL
 			}
 
 			return moves;
+		}
+
+		private static readonly Regex Initialization = new Regex(@"value (?'value'\d+?) goes to bot (?'bot'\d+?)\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		private static readonly Regex SwapOperation = new Regex(@"bot (?'sourceBot'\d+?) gives low to (?'lowTargetType'bot|output) (?'lowTargetId'\d+?) and high to (?'highTargetType'bot|output) (?'highTargetId'\d+?)\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+		public static BotOps Day10Parse(string input)
+		{
+			var lines = input.SplitLines();
+			var ops = new BotOps();
+
+			foreach(var line in lines)
+			{
+				var initializationMatch = Initialization.Match(line);
+				if(initializationMatch.Success)
+				{
+					var bot = initializationMatch.Groups["bot"].Value.ToInt();
+					var value = initializationMatch.Groups["value"].Value.ToInt();
+
+					if (!bot.HasValue || !value.HasValue)
+						throw new Exception($"could not parse \"{line}\" because value or bot could not be parsed");
+
+					ops.LoadBotOperations.Add(new LoadBotOperation(bot.Value, value.Value));
+
+					continue;
+				}
+
+				var swapMatch = SwapOperation.Match(line);
+				if(swapMatch.Success)
+				{
+					var sourceBot = swapMatch.Groups["sourceBot"].Value.ToInt();
+					var lowTargetType = swapMatch.Groups["lowTargetType"].Value.ParseAsEnum<TargetType>();
+					var lowTargetId = swapMatch.Groups["lowTargetId"].Value.ToInt();
+					var highTargetType = swapMatch.Groups["highTargetType"].Value.ParseAsEnum<TargetType>();
+					var highTargetId = swapMatch.Groups["highTargetId"].Value.ToInt();
+
+					if (!sourceBot.HasValue || !lowTargetId.HasValue || !highTargetId.HasValue)
+						throw new Exception($"could not parse \"{line}\" because source, low, or high id could not be parsed");
+
+					ops.SwapOperations.Add(new SwapOperation(sourceBot.Value, new Target(lowTargetId.Value, lowTargetType), new Target(highTargetId.Value, highTargetType)));
+
+					continue;
+				}
+
+				throw new Exception($"line {line} could not be parsed");
+			}
+
+			return ops;
 		}
 	}
 }
